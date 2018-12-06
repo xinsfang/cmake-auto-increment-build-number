@@ -12,6 +12,21 @@ set(VERSION_MINOR 0)
 set(VERSION_PATCH 0)
 set(VERSION_META "-alpha")
 
+list(APPEND CMAKE_PREFIX_PATH /usr/local/opt)
+message("prefix : ${CMAKE_PREFIX_PATH}")
+
+message("system: ${CMAKE_SYSTEM_PREFIX_PATH}")
+find_library(LZMA_LIBRARY lzma)
+message("lzma: ${LZMA_LIBRARY}") #lzma: /usr/local/lib/liblzma.dylib
+
+find_library(ZLIB_LIBRARY z) #zlib
+message("z: ${ZLIB_LIBRARY}") # z: /usr/lib/libz.dylib
+
+find_library(ZLIB_LIBRARY z)
+if (NOT ZLIB_LIBRARY)
+    message(FATAL_ERROR "Library 'zlib' not FOUND")
+endif(NOT ZLIB_LIBRARY)
+
 # Create command to compile the generate command
 add_custom_command(
     OUTPUT ${GENERATE_OUTPUT}
